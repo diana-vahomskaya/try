@@ -56,7 +56,12 @@ jobs:
       - name: Copy documentation files to docu repository
         run: |
           cp -r Createfile/Createfile/bin/Debug/net8.0/*.txt docu/
-
+      
+      - name: Check docu
+        run: |
+          cd docu/
+          ls -la  
+          
       - name: Configure git
         run: |
           cd docu
