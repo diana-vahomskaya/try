@@ -6,7 +6,7 @@ string currentDirectory = Directory.GetCurrentDirectory();
 
 string projectPath = Path.GetFullPath(Path.Combine(currentDirectory, @"..\.."));
 string outputFilePath = Path.Combine(AppContext.BaseDirectory, "output.txt");
-var filePath = $"{projectPath}\\Name.txt";
+var filePath = Path.Combine(projectPath, "Name.txt");
 
 try
 {
