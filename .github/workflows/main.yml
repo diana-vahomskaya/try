@@ -1,0 +1,40 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          repository: diana-vahomskaya/try
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref }}
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.0'  # Замените на вашу версию .NET
+
+      - name: Install dependencies
+        run: |
+          cd Createfile
+          dotnet restore
+
+      - name: Generate Documentation
+        run: |
+          cd Createfile
+          dotnet build
+  
+      - name: Run documentation generator
+        run: |
+          cd Createfile/Createfile
+          dotnet run --project Createfile.csproj
+      
