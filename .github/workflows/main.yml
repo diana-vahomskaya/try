@@ -44,15 +44,14 @@ jobs:
           repository: diana-vahomskaya/docu
           token: ${{ secrets.GITHUB_TOKEN }}
           path: docu
+          
       - name: List files in the output directory
         run: |
           cd Createfile/Createfile/bin/Debug/net8.0/
           ls -la  
+          
       - name: Copy documentation files to docu repository
         run: |
-          cp -r Createfile/Createfile/bin/Debug/net8.0/*.txt docu/
-
-          run: |
           cd docu
           git config user.name "github-actions"
           git config user.email "action@github.com"
