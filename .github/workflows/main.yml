@@ -50,8 +50,7 @@ jobs:
           ls -la  
       - name: Copy documentation files to docu repository
         run: |
-          cd Createfile/Createfile/bin/Debug/net8.0/ 
-          cp -r *.txt ../../../../../docu/ 
+          cp -r Createfile/Createfile/bin/Debug/net8.0/*.txt docu/
 
           run: |
           cd docu
