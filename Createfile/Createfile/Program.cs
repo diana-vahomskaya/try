@@ -4,7 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 string currentDirectory = Directory.GetCurrentDirectory();
 
-string projectPath = Path.GetFullPath(Path.Combine(currentDirectory, @"..\.."));
+string projectPath = Path.GetFullPath(Path.Combine(currentDirectory, @"../.."));
 string outputFilePath = Path.Combine(AppContext.BaseDirectory, "output.txt");
 var filePath = Path.Combine(projectPath, "Name.txt");
 
