@@ -7,16 +7,15 @@ on:
       - develop
       
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  repository-projects: write
+  contents: read
+  pages: write   
   
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write 
     
     steps:
       - name: Checkout repository
