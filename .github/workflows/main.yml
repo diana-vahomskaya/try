@@ -12,16 +12,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: diana-vahomskaya/try
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.ref }}
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0.0'  # Замените на вашу версию .NET
+          dotnet-version: '8.0.x'
 
       - name: Install dependencies
         run: |
@@ -37,4 +37,27 @@ jobs:
         run: |
           cd Createfile/Createfile
           dotnet run --project Createfile.csproj
-      
+
+      - name: Checkout docu repository
+        uses: actions/checkout@v3
+        with:
+          repository: diana-vahomskaya/docu
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: docu
+      - name: List files in the output directory
+        run: |
+          cd Createfile/Createfile/bin/Debug/net8.0/
+          ls -la  
+      - name: Copy documentation files to docu repository
+        run: |
+          cd Createfile/Createfile/bin/Debug/net8.0/ 
+          cp -r *.txt ../../../../../docu/ 
+
+          run: |
+          cd docu
+          git config user.name "github-actions"
+          git config user.email "action@github.com"
+          git checkout -B dist/${{ github.ref_name }}
+          git add .
+          git commit -m "Update documentation from ${GITHUB_SHA}" || echo "No changes to commit"
+          git push origin dist/${{ github.ref_name }} --force
